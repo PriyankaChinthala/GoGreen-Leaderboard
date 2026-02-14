@@ -189,7 +189,7 @@
             letter-spacing: 0.2px;
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 14px 16px;
             border: 2px solid var(--border);
@@ -201,13 +201,18 @@
             color: var(--text-primary);
         }
 
-        input:focus, select:focus {
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-green);
             box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
         }
 
-        input::placeholder {
+        input::placeholder, textarea::placeholder {
             color: #9ca3af;
         }
 
@@ -468,33 +473,28 @@
             flex-shrink: 0;
         }
 
-        .error-message {
-            background: #fef2f2;
-            border: 2px solid #ef4444;
-            color: #b91c1c;
-            padding: 16px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .success-message {
-            background: var(--light-green);
-            border: 2px solid var(--primary-green);
-            color: var(--dark-green);
-            padding: 16px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 500;
+        .newsletter-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), #fb923c);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
         }
 
         .region-badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 6px;
             font-size: 0.85em;
             font-weight: 600;
-            margin-left: 8px;
+            background: var(--light-green);
+            color: var(--dark-green);
         }
 
         .region-bangalore {
@@ -503,63 +503,66 @@
         }
 
         .region-hyderabad {
-            background: #fae8ff;
-            color: #86198f;
+            background: #fce7f3;
+            color: #9f1239;
         }
 
         .region-mumbai {
-            background: #fed7aa;
-            color: #9a3412;
+            background: #fef3c7;
+            color: #92400e;
         }
 
-        .newsletter-badge {
-            background: var(--gold);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-left: 8px;
-            font-size: 0.8em;
+        .success-message {
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--primary-green);
+            font-weight: 500;
         }
 
-        .newsletter-badge::before {
-            content: '⭐';
-            font-size: 0.9em;
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 4px solid #ef4444;
+            font-weight: 500;
         }
 
         .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--border);
+            border: 4px solid var(--light-green);
+            border-top: 4px solid var(--primary-green);
             border-radius: 50%;
-            border-top-color: var(--primary-green);
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .stat-card {
             background: var(--background);
             padding: 24px;
-            border-radius: 12px;
+            border-radius: 8px;
             text-align: center;
-            border: 2px solid var(--border);
+            border: 1px solid var(--border);
         }
 
-        .stat-value {
+        .stat-card .stat-value {
             font-size: 2.5em;
             font-weight: 800;
             color: var(--primary-green);
@@ -567,12 +570,24 @@
             margin-bottom: 8px;
         }
 
-        .stat-label {
+        .stat-card .stat-label {
             color: var(--text-muted);
             font-size: 0.9em;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
         }
 
         @media (max-width: 768px) {
@@ -584,17 +599,21 @@
                 font-size: 1em;
             }
 
-            .card {
-                padding: 24px;
+            header {
+                padding: 30px 20px;
             }
 
             .nav-tabs {
                 flex-direction: column;
-                padding: 6px;
+                gap: 8px;
             }
 
             .tab-btn {
-                padding: 14px 20px;
+                padding: 12px 20px;
+            }
+
+            .card {
+                padding: 24px;
             }
 
             .leaderboard-table {
@@ -658,46 +677,13 @@
         </header>
 
         <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('info')">How It Works</button>
-            <button class="tab-btn" onclick="switchTab('register')">Register</button>
+            <button class="tab-btn active" onclick="switchTab('register')">Register</button>
             <button class="tab-btn" onclick="switchTab('activities')">Activities</button>
             <button class="tab-btn" onclick="switchTab('leaderboard')">Leaderboard</button>
         </div>
 
-        <!-- Info Tab -->
-        <div id="info-tab" class="tab-content active">
-            <div class="card">
-                <h2>How It Works</h2>
-                <div class="info-section">
-                    <h3>Your Mission</h3>
-                    <p>Complete eco-friendly activities at the GoGreen Kiosk during the run and earn points to climb the leaderboard!</p>
-                </div>
-
-                <div class="info-section">
-                    <h3>Activities & Points</h3>
-                    <ul>
-                        <li><strong>Already a member / Become a member (20 points)</strong><br>Show your membership or sign up at the kiosk</li>
-                        <li><strong>Green Trivia (max 20 points)</strong><br>Answer green trivia questions (1-20 points based on performance)</li>
-                        <li><strong>Carrying water bottle to the run (15 points)</strong><br>Bring your own reusable water bottle</li>
-                        <li><strong>Collect Green Stamps (15 points)</strong><br>Earn stamps for eco-friendly actions</li>
-                        <li><strong>Take Green Pictures (10 points)</strong><br>Snap a photo at the GoGreen photo booth</li>
-                        <li><strong>Get your colleague to sign up (20 points)</strong><br>Refer a colleague to join GoGreen</li>
-                    </ul>
-                </div>
-
-                <div class="info-section">
-                    <h3>Rewards</h3>
-                    <p>Top scorers will be featured in the upcoming <strong>GoGreen Newsletter</strong>! Your contribution to sustainability will be celebrated across the organization.</p>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" onclick="switchTab('register')">Get Started</button>
-                </div>
-            </div>
-        </div>
-
         <!-- Register Tab -->
-        <div id="register-tab" class="tab-content">
+        <div id="register-tab" class="tab-content active">
             <div class="card">
                 <h2>Register for GoGreen</h2>
                 <div id="register-message"></div>
@@ -711,8 +697,8 @@
                         <input type="text" id="name" required placeholder="Enter your full name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" required placeholder="Enter your email address">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email address (optional)">
                     </div>
                     <div class="form-group">
                         <label for="region">Region *</label>
@@ -750,6 +736,9 @@
                         <div class="user-score">
                             <span id="current-user-score">0</span> / 100 Points
                         </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn-secondary" onclick="logout()" style="background: white; color: var(--primary-green); border: 2px solid white; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">Logout</button>
+                        </div>
                     </div>
 
                     <h2>Check In Your Activities</h2>
@@ -766,6 +755,9 @@
         <!-- Leaderboard Tab -->
         <div id="leaderboard-tab" class="tab-content">
             <div class="card">
+                <div class="logo-container">
+                    <img src="logo.jpeg" alt="GoGreen Logo" onerror="this.style.display='none'">
+                </div>
                 <h2>Live Leaderboard</h2>
                 <div id="leaderboard-content">
                     <table class="leaderboard-table">
@@ -777,6 +769,7 @@
                                 <th>Region</th>
                                 <th>Score</th>
                                 <th>Progress</th>
+                                <th>Eco-Tip/Goal</th>
                             </tr>
                         </thead>
                         <tbody id="leaderboard-body">
@@ -820,39 +813,57 @@
         const ACTIVITIES = [
             {
                 id: 'membership',
-                name: 'Already a member / Become a member',
-                description: 'Show your membership or sign up at the kiosk',
-                points: 20
-            },
-            {
-                id: 'trivia',
-                name: 'Green Trivia',
-                description: 'Answer green trivia questions (1-20 points)',
-                points: 20
-            },
-            {
-                id: 'water-bottle',
-                name: 'Carrying water bottle to the run',
-                description: 'Bring your own reusable water bottle',
-                points: 15
-            },
-            {
-                id: 'green-stamps',
-                name: 'Collect Green Stamps',
-                description: 'Earn stamps for eco-friendly actions',
-                points: 15
-            },
-            {
-                id: 'photo-booth',
-                name: 'Take Green Pictures',
-                description: 'Snap a photo at the GoGreen photo booth',
+                name: 'Are you already a GoGreen Member OR want to sign up today?',
+                description: 'Show your existing GoGreen membership card or sign up for membership at the kiosk booth',
                 points: 10
             },
             {
-                id: 'referral',
-                name: 'Get your colleague to sign up',
-                description: 'Refer a colleague to join GoGreen',
-                points: 20
+                id: 'kiosk-game',
+                name: 'Play at Least One Game at the Kiosk Booth',
+                description: 'Participate in any interactive game at our kiosk booth - enter your score to earn points (up to 15 points)',
+                points: 15,
+                manualEntry: true,
+                maxPoints: 15
+            },
+            {
+                id: 'green-stamps',
+                name: 'How many Green activity stamps did you collect?',
+                description: 'Earn green stamps for eco-friendly actions: 1 stamp = 3.33 points, 2 stamps = 6.66 points, 3 stamps = 10 points - enter the number of points based on stamps collected (up to 10 points)',
+                points: 10,
+                manualEntry: true,
+                maxPoints: 10
+            },
+            {
+                id: 'photo-gallery',
+                name: 'Can you show us an eco-friendly picture from your gallery',
+                description: 'Share an eco-friendly or sustainability-themed picture from your phone gallery at the kiosk',
+                points: 15
+            },
+            {
+                id: 'college-signup',
+                name: 'Score more for Registering your College/Group of friends for GoGreen',
+                description: 'Get your colleague or friend from your college to sign up for GoGreen at the kiosk',
+                points: 15
+            },
+            {
+                id: 'eco-tip',
+                name: 'Write your personal sustainability goal OR share your best Eco-tip',
+                description: 'Write and share your personal sustainability goal or your best eco-friendly tip - this will be displayed on the leaderboard',
+                points: 20,
+                manualEntry: true,
+                requiresText: true
+            },
+            {
+                id: 'multiple-games',
+                name: 'Bonus points for playing multiple games at the Kiosk Booth',
+                description: 'Bonus points for playing multiple games at the kiosk booth',
+                points: 5
+            },
+            {
+                id: 'water-bottle',
+                name: 'Did you bring your own reusable water bottle?',
+                description: 'Bring your own reusable water bottle to the event and show it at the kiosk to earn points',
+                points: 10
             }
         ];
 
@@ -944,10 +955,11 @@
             const newUser = {
                 sid,
                 name,
-                email,
+                email: email || '',
                 region,
                 activities: {},
                 totalScore: 0,
+                ecoTip: '',
                 registeredAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 
@@ -1025,21 +1037,55 @@
 
             // Render activities
             activityList.innerHTML = ACTIVITIES.map(activity => {
-                const isCompleted = currentUser.activities && currentUser.activities[activity.id];
-                return `
-                    <div class="activity-item ${isCompleted ? 'completed' : ''}" onclick="toggleActivity('${activity.id}')">
-                        <input type="checkbox" 
-                               class="activity-checkbox" 
-                               ${isCompleted ? 'checked' : ''} 
-                               onchange="toggleActivity('${activity.id}')"
-                               onclick="event.stopPropagation()">
-                        <div class="activity-info">
-                            <div class="activity-name">${activity.name}</div>
-                            <div class="activity-desc">${activity.description}</div>
+                const activityData = currentUser.activities && currentUser.activities[activity.id];
+                const isCompleted = activityData !== undefined && activityData !== false;
+                
+                if (activity.requiresText) {
+                    return `
+                        <div class="activity-item ${isCompleted ? 'completed' : ''}">
+                            <input type="checkbox" 
+                                   class="activity-checkbox" 
+                                   ${isCompleted ? 'checked' : ''} 
+                                   onchange="toggleActivityWithText('${activity.id}')"
+                                   onclick="event.stopPropagation()">
+                            <div class="activity-info">
+                                <div class="activity-name">${activity.name}</div>
+                                ${isCompleted && currentUser.ecoTip ? `<div style="margin-top: 8px; padding: 8px; background: white; border-radius: 4px; font-style: italic; color: var(--text-secondary);">"${currentUser.ecoTip}"</div>` : ''}
+                            </div>
+                            <div class="activity-points">+${activity.points}</div>
                         </div>
-                        <div class="activity-points">+${activity.points}</div>
-                    </div>
-                `;
+                    `;
+                } else if (activity.manualEntry) {
+                    const earnedPoints = isCompleted ? activityData : 0;
+                    return `
+                        <div class="activity-item ${isCompleted ? 'completed' : ''}" onclick="toggleActivity('${activity.id}')">
+                            <input type="checkbox" 
+                                   class="activity-checkbox" 
+                                   ${isCompleted ? 'checked' : ''} 
+                                   onchange="toggleActivity('${activity.id}')"
+                                   onclick="event.stopPropagation()">
+                            <div class="activity-info">
+                                <div class="activity-name">${activity.name}</div>
+                                ${isCompleted ? `<div style="margin-top: 4px; color: var(--primary-green); font-weight: 600;">Earned: ${earnedPoints} points</div>` : ''}
+                            </div>
+                            <div class="activity-points">+${activity.maxPoints || activity.points}</div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="activity-item ${isCompleted ? 'completed' : ''}" onclick="toggleActivity('${activity.id}')">
+                            <input type="checkbox" 
+                                   class="activity-checkbox" 
+                                   ${isCompleted ? 'checked' : ''} 
+                                   onchange="toggleActivity('${activity.id}')"
+                                   onclick="event.stopPropagation()">
+                            <div class="activity-info">
+                                <div class="activity-name">${activity.name}</div>
+                            </div>
+                            <div class="activity-points">+${activity.points}</div>
+                        </div>
+                    `;
+                }
             }).join('');
         }
 
@@ -1054,13 +1100,86 @@
                 currentUser.activities = {};
             }
 
-            // Toggle activity
-            if (currentUser.activities[activityId]) {
-                delete currentUser.activities[activityId];
-                currentUser.totalScore -= activity.points;
+            // For manual entry activities (except text-based ones)
+            if (activity.manualEntry && !activity.requiresText) {
+                if (!currentUser.activities[activityId]) {
+                    const pointsStr = prompt(`Enter points earned for "${activity.name}" (0-${activity.maxPoints || activity.points}):`);
+                    if (pointsStr === null) return; // User cancelled
+                    
+                    const points = parseInt(pointsStr);
+                    if (isNaN(points) || points < 0 || points > (activity.maxPoints || activity.points)) {
+                        showMessage('activity-message', `Please enter a valid number between 0 and ${activity.maxPoints || activity.points}`, 'error');
+                        setTimeout(() => {
+                            document.getElementById('activity-message').innerHTML = '';
+                        }, 3000);
+                        return;
+                    }
+                    
+                    currentUser.activities[activityId] = points;
+                    currentUser.totalScore = (currentUser.totalScore || 0) + points;
+                } else {
+                    // Unchecking - remove the points that were added
+                    const earnedPoints = currentUser.activities[activityId];
+                    delete currentUser.activities[activityId];
+                    currentUser.totalScore -= earnedPoints;
+                }
             } else {
+                // Regular toggle for non-manual entry activities
+                if (currentUser.activities[activityId]) {
+                    delete currentUser.activities[activityId];
+                    currentUser.totalScore -= activity.points;
+                } else {
+                    currentUser.activities[activityId] = true;
+                    currentUser.totalScore = (currentUser.totalScore || 0) + activity.points;
+                }
+            }
+
+            // Update user
+            await updateUser(currentUser);
+
+            // Re-render
+            await renderActivities();
+
+            // Show feedback
+            const message = currentUser.activities[activityId] 
+                ? `Great! You earned points!` 
+                : `Activity unchecked. Points removed.`;
+            showMessage('activity-message', message, 'success');
+            setTimeout(() => {
+                document.getElementById('activity-message').innerHTML = '';
+            }, 3000);
+        }
+
+        async function toggleActivityWithText(activityId) {
+            if (!currentUser) return;
+
+            const activity = ACTIVITIES.find(a => a.id === activityId);
+            if (!activity) return;
+
+            // Initialize activities object if it doesn't exist
+            if (!currentUser.activities) {
+                currentUser.activities = {};
+            }
+
+            // If checking the box
+            if (!currentUser.activities[activityId]) {
+                const ecoTip = prompt('Please share your personal sustainability goal or best eco-tip:');
+                if (!ecoTip || ecoTip.trim() === '') {
+                    showMessage('activity-message', 'You must enter a sustainability goal or eco-tip to earn these points.', 'error');
+                    setTimeout(() => {
+                        document.getElementById('activity-message').innerHTML = '';
+                    }, 3000);
+                    return;
+                }
+                
                 currentUser.activities[activityId] = true;
+                currentUser.ecoTip = ecoTip.trim();
                 currentUser.totalScore = (currentUser.totalScore || 0) + activity.points;
+            } else {
+                // Unchecking
+                delete currentUser.activities[activityId];
+                currentUser.ecoTip = '';
+                currentUser.totalScore -= activity.points;
             }
 
             // Update user
@@ -1079,13 +1198,25 @@
             }, 3000);
         }
 
+        function logout() {
+            if (confirm('Are you sure you want to logout? You can login again with your Employee ID.')) {
+                localStorage.removeItem('gogreen_current_user_sid');
+                currentUser = null;
+                switchTab('register');
+                showMessage('register-message', 'You have been logged out successfully.', 'success');
+                setTimeout(() => {
+                    document.getElementById('register-message').innerHTML = '';
+                }, 3000);
+            }
+        }
+
         async function renderLeaderboard() {
             const leaderboardBody = document.getElementById('leaderboard-body');
             
             // Show loading state
             leaderboardBody.innerHTML = `
                 <tr>
-                    <td colspan="6" style="text-align: center; padding: 40px;">
+                    <td colspan="7" style="text-align: center; padding: 40px;">
                         <div class="loading-spinner" style="margin: 0 auto;"></div>
                         <p style="margin-top: 16px; color: var(--text-muted);">Loading leaderboard...</p>
                     </td>
@@ -1100,7 +1231,7 @@
             if (sortedUsers.length === 0) {
                 leaderboardBody.innerHTML = `
                     <tr>
-                        <td colspan="6">
+                        <td colspan="7">
                             <div class="empty-state">
                                 <div class="empty-state-icon">🏆</div>
                                 <h3>No Participants Yet</h3>
@@ -1119,7 +1250,7 @@
                 const regionClass = `region-${user.region.toLowerCase()}`;
                 const score = user.totalScore || 0;
                 const percentage = (score / 100) * 100;
-                const isTopThree = rank <= 3;
+                const ecoTip = user.ecoTip || '';
 
                 return `
                     <tr>
@@ -1128,7 +1259,6 @@
                         </td>
                         <td>
                             <strong>${user.name}</strong>
-                            ${isTopThree ? '<span class="newsletter-badge">Newsletter</span>' : ''}
                         </td>
                         <td>${user.sid}</td>
                         <td><span class="region-badge ${regionClass}">${user.region}</span></td>
@@ -1137,6 +1267,9 @@
                             <div class="score-bar">
                                 <div class="score-fill" style="width: ${percentage}%"></div>
                             </div>
+                        </td>
+                        <td style="max-width: 300px; font-style: italic; color: var(--text-secondary);">
+                            ${ecoTip ? `"${ecoTip}"` : '-'}
                         </td>
                     </tr>
                 `;
